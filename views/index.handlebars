@@ -1,0 +1,52 @@
+<h1>To Do List:</h1>
+<h3>Tasks:</h3>
+
+<ol>
+    {{#each tasks}}
+        {{#unless this.complete}}
+            <li>
+                {{this.task_name}}
+                <br><br>
+
+                 <form action="/{{this.id}}?_method=PUT" method="POST">
+                    <input type="hidden" name="completed" value="1">
+                    <button type="submit">Mark complete</button>
+                </form>
+                <form action="/{{this.id}}?_method=DELETE" method="POST"> 
+                    <button type="submit">DELETE!</button>
+                </form>
+
+            </li><br>
+        {{/unless}}
+    {{/each}}
+</ol>
+
+<h3>Completed Tasks</h3>
+<ol>
+    {{#each tasks}}
+        {{#if this.complete}}
+            <li>
+                {{this.task_name}}
+                <br><br>
+                <form action="/{{this.id}}?_method=PUT" method="POST">
+                    <input type="hidden" name="completed" value="0">
+                    <button type="submit">Mark incomplete</button>
+                </form>
+                <form action="/{{this.id}}?_method=DELETE" method="POST"> 
+                    <button type="submit">DELETE!</button>
+                </form>
+            </li><br>
+        {{/if}}
+    {{/each}}
+</ol>
+
+<h1>Add a Task</h1>
+<form action="/" method="POST">
+    <div>
+        <label for="taskinput">Task:</label>
+        <input type="text" name="taskinput">
+    </div>
+
+    <button type="submit">Add Task</button>
+</form>
+
